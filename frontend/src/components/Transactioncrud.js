@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import BackendCaller from "../API/BackendCaller";
 import Multiselect from "multiselect-react-dropdown";
 import TransactionCard from "./TransactionCard";
-function Transactioncrud({ username, transactions, setTransactions }) {
+function Transactioncrud({
+  username,
+  transactions,
+  setTransactions,
+  flag,
+  setFlag,
+}) {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [splitters, setSplitters] = useState([]);
   const [users, setUsers] = useState([]);
-  var [flag, setFlag] = useState(false);
   useEffect(() => {
     async function getData() {
       try {
@@ -60,9 +65,6 @@ function Transactioncrud({ username, transactions, setTransactions }) {
     }
   }
   async function handleSubmit() {
-    setFlag(!flag);
-    setAmount(0);
-    setCategory("");
     console.log(flag);
     try {
       let response = await BackendCaller.post(
@@ -76,6 +78,9 @@ function Transactioncrud({ username, transactions, setTransactions }) {
     } catch (error) {
       console.log(error);
     }
+    setFlag(!flag);
+    setAmount(0);
+    setCategory("");
   }
   return (
     <>
