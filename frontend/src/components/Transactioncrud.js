@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import BackendCaller from "../API/BackendCaller";
 import Multiselect from "multiselect-react-dropdown";
-function Transactioncrud({ username, transactions }) {
+import TransactionCard from "./TransactionCard";
+function Transactioncrud({ username, transactions, setTransactions }) {
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [splitters, setSplitters] = useState([]);
@@ -16,6 +17,18 @@ function Transactioncrud({ username, transactions }) {
         console.log(error);
       }
     }
+    async function getTransactions() {
+      try {
+        let response = await BackendCaller.get(
+          `getTransactionOfUser/${username}`
+        );
+        setTransactions(response.data.Transactions);
+        console.log(transactions);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getTransactions();
     getData();
   }, []);
   //   function preprocess(temp) {
@@ -97,6 +110,12 @@ function Transactioncrud({ username, transactions }) {
         >
           Create Transaction
         </button>
+      </div>
+      <div className="text-3xl text-center">Transactions Done</div>
+      <div className="grid grid-cols-3 grid-rows-1 mt-2 overflow-y-scroll gap-x-1 gap-y-2">
+        {transactions.map((transaction) => {
+          return <TransactionCard transaction={transaction} />;
+        })}
       </div>
     </>
   );
