@@ -50,7 +50,7 @@ def createTransaction(request, username, amount, category):
             p = User.objects.filter(username=i).first()
             print(p)
             p1.splitters.add(p)
-        return JsonResponse({"res": "success"})
+        return JsonResponse({"tid": p1.id})
     except:
         return JsonResponse({"res": "an error occured"})
 
