@@ -14,7 +14,7 @@ function App() {
             setTransactions={setTransactions}
           />
         </div>
-        <div className="flex flex-col justify-center w-2/3 h-screen">
+        <div className="w-2/3 h-screen">
           <div>
             <Transactioncrud
               username={username}

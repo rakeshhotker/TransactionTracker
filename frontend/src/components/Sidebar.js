@@ -23,46 +23,46 @@ function Sidebar({ transactions, username }) {
         console.log(error);
       }
     }
-    async function getmoneyUsersOwe() {
-      for (let i in transactions) {
-        totalspent += parseInt(transactions[i]["amount"]);
-        console.log(totalspent, "totalspent");
-        let k = transactions[i]["splitters"];
-        for (let j in k) {
-          moneyotherowe.push(k[j]);
-        }
-      }
-      // setTotalSpent(totalspent);
-      moneyotherowe = [...new Set(moneyotherowe)];
-      async function getowedData() {
-        try {
-          for (let i in moneyotherowe) {
-            let response = await BackendCaller.get(
-              `getMoneyOwedByUser/${moneyotherowe[i]}`
-            );
-            let tempList = response.data.owedList;
-            for (let i in tempList) {
-              let data = {};
-              if (tempList[i]["transaction_done_by"] === username) {
-                data["owedby"] = moneyotherowe[i];
-                let amountowed = parseInt(tempList[i]["amount_you_owe"]);
-                data["amountowed"] = amountowed;
-                totalmoneyOwedtoUser += amountowed;
-                console.log(totalmoneyOwedtoUser);
-                finalowersList.push(data);
-              }
-            }
-            // setTotalOwed(totalmoneyOwedtoUser);
-          }
-          console.log(finalowersList);
-          setOwerslist(finalowersList);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      getowedData();
-    }
-    getmoneyUsersOwe();
+    // async function getmoneyUsersOwe() {
+    //   for (let i in transactions) {
+    //     totalspent += parseInt(transactions[i]["amount"]);
+    //     console.log(totalspent, "totalspent");
+    //     let k = transactions[i]["splitters"];
+    //     for (let j in k) {
+    //       moneyotherowe.push(k[j]);
+    //     }
+    //   }
+    //   // setTotalSpent(totalspent);
+    //   moneyotherowe = [...new Set(moneyotherowe)];
+    //   async function getowedData() {
+    //     try {
+    //       for (let i in moneyotherowe) {
+    //         let response = await BackendCaller.get(
+    //           `getMoneyOwedByUser/${moneyotherowe[i]}`
+    //         );
+    //         let tempList = response.data.owedList;
+    //         for (let i in tempList) {
+    //           let data = {};
+    //           if (tempList[i]["transaction_done_by"] === username) {
+    //             data["owedby"] = moneyotherowe[i];
+    //             let amountowed = parseInt(tempList[i]["amount_you_owe"]);
+    //             data["amountowed"] = amountowed;
+    //             totalmoneyOwedtoUser += amountowed;
+    //             console.log(totalmoneyOwedtoUser);
+    //             finalowersList.push(data);
+    //           }
+    //         }
+    //         // setTotalOwed(totalmoneyOwedtoUser);
+    //       }
+    //       console.log(finalowersList);
+    //       setOwerslist(finalowersList);
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }
+    //   getowedData();
+    // }
+    // getmoneyUsersOwe();
     getData();
   }, [transactions]);
   console.log(totalspent);

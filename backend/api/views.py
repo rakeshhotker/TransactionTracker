@@ -41,12 +41,15 @@ def getUser(request, username):
 
 def createTransaction(request, username, amount, category):
     splitterslist = json.loads(request.body)["splitters"]
+    splitterslist1 = []
+    for i in splitterslist:
+        splitterslist1.append(i["username"])
     print(splitterslist)
     try:
         p1 = Transaction.objects.create(
             username=username, amount=amount, category=category)
         print(model_to_dict(p1))
-        for i in splitterslist:
+        for i in splitterslist1:
             p = User.objects.filter(username=i).first()
             print(p)
             p1.splitters.add(p)
@@ -76,7 +79,7 @@ def getTransactionOfUser(request, username):
         p = Transaction.objects.filter(username=username)
         for i in p:
             i = model_to_dict(i)
-            print(i)
+            # print(i)
             data = {}
             for j in i:
                 if j != "splitters":
@@ -99,7 +102,7 @@ def StoreMoneyOwedByUser(request, username, amount, tid):
     try:
         p1 = Transaction.objects.filter(id=tid).first()
         p = MoneyOwed.objects.create(username=username, amount=amount, tid=p1)
-        print(p)
+        # print(p)
         return JsonResponse({"res": "success"})
     except:
         return JsonResponse({"res": "An err occured"})
@@ -113,9 +116,9 @@ def getMoneyOwedByUser(request, username):
         for i in response:
             data = {}
             i = model_to_dict(i)
-            print(i)
+            # print(i)
             k = model_to_dict(Transaction.objects.filter(id=i["tid"]).first())
-            print(k)
+            # print(k)
             data["transaction_done_by"] = k["username"]
             data["amount_you_owe"] = i["amount"]
             data["tid"] = k["id"]
