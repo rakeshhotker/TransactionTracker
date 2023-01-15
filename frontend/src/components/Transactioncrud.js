@@ -128,7 +128,13 @@ function Transactioncrud({
         <div className="overflow-y-scroll h-2/3">
           <div className="grid grid-cols-3 grid-rows-1 mt-2 gap-x-1 gap-y-2">
             {transactions.map((transaction) => {
-              return <TransactionCard transaction={transaction} />;
+              return (
+                <TransactionCard
+                  transaction={transaction}
+                  flag={flag}
+                  setFlag={setFlag}
+                />
+              );
             })}
           </div>
         </div>

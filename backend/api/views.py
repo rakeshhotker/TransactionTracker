@@ -149,3 +149,15 @@ def getMoneyOwedByUser(request, username):
         return JsonResponse({"owedList": owedList})
     except:
         return JsonResponse({"res": "An err occured"})
+
+# delete Transaction function
+
+
+def deleteTransaction(request, tid):
+    try:
+        p = Transaction.objects.filter(id=tid).first()
+        print(p)
+        p.delete()
+        return JsonResponse({"res": "success"})
+    except:
+        return JsonResponse({"res": "An err occured"})
