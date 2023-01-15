@@ -12,17 +12,15 @@ function TransactionCard({ transaction, flag, setFlag }) {
       console.log(error);
     }
   }
+
   return (
     <>
-      <div className="flex flex-col items-center justify-around w-48 h-64 mt-2 border-2">
+      <div className="flex flex-col items-center justify-around w-48 mt-2 border-2 h-72">
         <div className="flex items-center justify-center w-20 h-20 bg-blue-400 rounded-full">
           <p>{transaction.amount}</p>
         </div>
         <div>
-          <div className="flex justify-between">
-            <button className="px-4 py-2 text-white bg-blue-400 rounded-full font-md hover:bg-green-700">
-              Update
-            </button>
+          <div className="flex justify-center">
             <button
               className="px-4 py-2 text-white bg-blue-400 rounded-full font-md hover:bg-red-700"
               onClick={(e) => handleDelete(e, transaction.id)}
@@ -34,7 +32,7 @@ function TransactionCard({ transaction, flag, setFlag }) {
             <span className="text-xl">Category:</span>&nbsp;
             <span className="text-md">{transaction.category}</span>
           </div>
-          <div className="h-20">
+          <div className="h-20 pb-2">
             <div className="text-md">Splitted with:</div>
             <div className="flex flex-col h-16 overflow-y-scroll">
               {transaction.splitters.length > 0 ? (
