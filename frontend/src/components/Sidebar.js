@@ -22,6 +22,8 @@ function Sidebar({ transactions, username, flag }) {
       }
     }
     async function getmoneyUsersOwe() {
+      setTotalOwed(0);
+      setTotalSpent(0);
       let moneyotherowe = [];
       let finalowersList = [];
       for (let i in transactions) {
@@ -63,7 +65,7 @@ function Sidebar({ transactions, username, flag }) {
     }
     getmoneyUsersOwe();
     getData();
-  }, [transactions]);
+  }, [transactions, flag]);
   console.log(totalspent);
   console.log(totalmoneyOwedtoUser);
   return (
