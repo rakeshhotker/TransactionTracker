@@ -4,14 +4,12 @@ import BackendCaller from "../API/BackendCaller";
 function Sidebar({ transactions, username, flag }) {
   const [owedList, setOwedList] = useState([]);
   const [owersList, setOwerslist] = useState([]);
-  // var [totalspent, setTotalSpent] = useState(0);
-  // var [totalmoneyOwedtoUser, setTotalOwed] = useState(0);
+  var [totalspent, setTotalSpent] = useState(0);
+  var [totalmoneyOwedtoUser, setTotalOwed] = useState(0);
 
-  var totalspent = 0;
-  var totalmoneyOwedtoUser = 0;
-  let i = 0;
+  // var totalspent = 0;
+  // var totalmoneyOwedtoUser = 0;
   useEffect(() => {
-    console.log(i++, "count of no of times called");
     async function getData() {
       try {
         let response = await BackendCaller.get(
@@ -34,7 +32,7 @@ function Sidebar({ transactions, username, flag }) {
           moneyotherowe.push(k[j]);
         }
       }
-      // setTotalSpent(totalspent);
+      setTotalSpent(totalspent);
       moneyotherowe = [...new Set(moneyotherowe)];
       console.log(moneyotherowe);
       try {
@@ -55,7 +53,7 @@ function Sidebar({ transactions, username, flag }) {
               finalowersList.push(data);
             }
           }
-          // setTotalOwed(totalmoneyOwedtoUser);
+          setTotalOwed(totalmoneyOwedtoUser);
         }
         console.log(finalowersList);
         setOwerslist(finalowersList);
@@ -67,6 +65,7 @@ function Sidebar({ transactions, username, flag }) {
     getData();
   }, [transactions]);
   console.log(totalspent);
+  console.log(totalmoneyOwedtoUser);
   return (
     <>
       <div className="h-1/3">
@@ -105,7 +104,7 @@ function Sidebar({ transactions, username, flag }) {
           })}
         </div>
       </div>
-      <div className="flex flex-col items-center text-center h-1/3">
+      <div className="flex flex-col items-center mt-10 text-center h-1/3">
         <div className="text-2xl">Total Spent</div>
         <div className="flex items-center justify-center w-20 h-20 bg-blue-300 rounded-full">
           <p>{totalspent - totalmoneyOwedtoUser}</p>

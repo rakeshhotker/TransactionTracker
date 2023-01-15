@@ -5,6 +5,7 @@ import json
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
 from . models import *
+from django.contrib.auth import authenticate
 
 
 def test(request):
@@ -12,6 +13,15 @@ def test(request):
     return JsonResponse(response)
 
 # createUser
+
+
+def authenticateUser(request):
+    useri = json.loads(request.body)["username"]
+    passw = json.loads(request.body)["password"]
+    user = (getUserauth(username=useri))
+    if user["password"] == passw and user["username"] == useri:
+        return JsonResponse({"res": "success"})
+    return JsonResponse({})
 
 
 def createUser(request):
@@ -37,6 +47,19 @@ def getUser(request, username):
         return JsonResponse(data)
     except:
         return JsonResponse({"res": "an error occured"})
+
+
+def getUserauth(username):
+    try:
+        response = User.objects.filter(username=username)
+        data = {}
+        for i in response:
+            i = model_to_dict(i)
+            for j in i:
+                data[j] = i[j]
+        return data
+    except:
+        return {}
 
 
 def createTransaction(request, username, amount, category):

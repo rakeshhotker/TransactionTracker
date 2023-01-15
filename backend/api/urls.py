@@ -10,5 +10,6 @@ urlpatterns = [
     path('getTransactionOfUser/<username>', views.getTransactionOfUser),
     path('storeMoneyOwedByUser/<username>/<amount>/<tid>',
          views.StoreMoneyOwedByUser),
-    path('getMoneyOwedByUser/<username>', views.getMoneyOwedByUser)
+    path('getMoneyOwedByUser/<username>', views.getMoneyOwedByUser),
+    path('authenticateUser', views.authenticateUser)
 ]
