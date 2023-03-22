@@ -1,5 +1,5 @@
-# CohesiveInternshipTask <br/>
-clone the repository CohesiveInternshipTask and switch to master branch<br/>
+# TransactionTracker<br/>
+clone the repository TransactionTracker and switch to master branch<br/>
 #<strong>BACKEND SETUP<strong/><br/>
 pip version 22 or above<br/>
 Django version 4<br/>
